@@ -13,3 +13,12 @@ services:
     restart: always
     ports:
       - 8080:8080
+
+  nest:
+    build: .
+    volumes:
+      - .:/nest
+    ports:
+      - 3000:3000
+      - 9229:9229
+    tty: true    

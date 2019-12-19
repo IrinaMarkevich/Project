@@ -1,22 +1,22 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn } from "typeorm";
 
 @Entity()
 export class USER {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id: string;
 
-  @Column({ length: 500 })
+  @Column({ type: "character varying" })
   name: string;
 
-  @Column()
+  @Column({ type: "character varying" })
   password: string;
 
-  @Column()
+  @Column({ type: "character varying" })
   email: string;
 
-  @Column()
+  @Column({type: "character" })
   gender: string;
 
-  @Column('int')
+  @Column({type: "integer" })
   age: number;
 }

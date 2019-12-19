@@ -7,18 +7,17 @@ import { USER } from './user.entity';
 export class UserService {
   constructor(
     @InjectRepository(USER)
-    private readonly userRepository: Repository<USER>,
+    // private readonly userRepository: Repository<USER>,
+    private readonly users: USER[] = []
   ) {}
 
-  async findAll(): Promise<USER[]> {
-    return await this.userRepository.find();
+  findAll(): USER[] {
+    return this.users;
   }
   async getUser(userID): Promise<any> {
-    let id = Number(userID);
-    const users = [];
-    users.push(this.userRepository);
+    let id = String(userID);
     return new Promise(resolve => {
-        const user = users.find(user => user.id === id);
+        const user = this.users.find(user => user.id === id);
         if (!user) {
             throw new HttpException('User does not exist!', 404);
         }
@@ -26,43 +25,35 @@ export class UserService {
     });
   }
   async addUser(user): Promise<any> {                // очень большая вероятность, что эта функция не работает,     
-    const users = [];                                // потому что пользователь добавляется в массив, а не в userRepository.
-    users.push(this.userRepository);                 // А как добавлять в userRepository я пока не знаю
-    return new Promise(resolve => {
-        users.push(user);
-        resolve(users);
+   return new Promise(resolve => {                   // потому что пользователь добавляется в массив, а не в userRepository.
+     this.users.push(user);                          // А как добавлять в userRepository я пока не знаю
+     resolve(this.users);
     });
 }
   async getPassword(userID): Promise<any> {
-    let id = Number(userID);
-    const users = [];
-    users.push(this.userRepository);
+    let id = String(userID);
     return new Promise(resolve => {
-    const user = users.find(user => user.id === id); 
+    const user = this.users.find(user => user.id === id); 
     if (!user) {
         throw new HttpException('User does not exist!', 404);
     }
-    resolve(user.Password)
+    resolve(user.password)
     });
 }
   async getEmail(userID): Promise<any> {
-    let id = Number(userID);
-    const users = [];
-    users.push(this.userRepository);
+    let id = String(userID);
     return new Promise(resolve => {
-    const user = users.find(user => user.id === id); 
+    const user = this.users.find(user => user.id === id); 
     if (!user) {
         throw new HttpException('User does not exist!', 404);
     }
-    resolve(user.Email)
+    resolve(user.email)
     });
 }
   async getName(userID): Promise<any> {
-    let id = Number(userID);
-    const users = [];
-    users.push(this.userRepository);
+    let id = String(userID);
     return new Promise(resolve => {
-    const user = users.find(user => user.id === id); 
+    const user = this.users.find(user => user.id === id); 
     if (!user) {
         throw new HttpException('User does not exist!', 404);
     }
@@ -70,11 +61,9 @@ export class UserService {
     });
 }
   async getGender(userID): Promise<any> {
-    let id = Number(userID);
-    const users = [];
-    users.push(this.userRepository);
+    let id = String(userID);
     return new Promise(resolve => {
-    const user = users.find(user => user.id === id); 
+    const user = this.users.find(user => user.id === id); 
     if (!user) {
         throw new HttpException('User does not exist!', 404);
     }
@@ -82,11 +71,9 @@ export class UserService {
     });
 }
   async getAge(userID): Promise<any> {
-    let id = Number(userID);
-    const users = [];
-    users.push(this.userRepository);
+    let id = String(userID);
     return new Promise(resolve => {
-    const user = users.find(user => user.id === id); 
+    const user = this.users.find(user => user.id === id); 
     if (!user) {
         throw new HttpException('User does not exist!', 404);
     }
@@ -94,16 +81,14 @@ export class UserService {
     });
 }
   async deleteUser(userID): Promise<any> {                       // с этой функцией та же история, что и с addUser
-    let id = Number(userID);
-    const users = [];
-    users.push(this.userRepository);
+    let id = String(userID);
     return new Promise(resolve => {
-        let index = users.findIndex(user => user.id === id);
+        let index = this.users.findIndex(user => user.id === id);
         if (index === -1) {
             throw new HttpException('user does not exist!', 404);
         }
-        users.splice(1, index);
-        resolve(users);
+        this.users.splice(1, index);
+        resolve(this.users);
     });
 }
 }

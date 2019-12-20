@@ -7,8 +7,9 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get(':id')
-  get(@Param() params) {
-    console.log(1)
-      return this.userService.getUser(params.id);
+  getUsers(@Param() params) {
+    //console.log(1)
+    params = 1
+      return this.userService.getUser(params);
   }
 }

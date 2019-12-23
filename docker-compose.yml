@@ -1,12 +1,19 @@
 version: '3.1'
 
+
 services:
 
   db:
     image: postgres
     restart: always
+    ports:
+    - "5432:5432"
     environment:
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: example
+      POSTGRES_DB: User
+    volumes:
+    - /srv/docker/postgresql:/var/lib/postgresql
 
   adminer:
     image: adminer

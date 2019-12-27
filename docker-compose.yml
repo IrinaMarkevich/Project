@@ -1,6 +1,5 @@
 version: '3.1'
 
-
 services:
 
   db:
@@ -11,9 +10,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: example
-      POSTGRES_DB: User
-    volumes:
-    - /srv/docker/postgresql:/var/lib/postgresql
+      POSTGRES_DB: postgres
 
   adminer:
     image: adminer

@@ -9,14 +9,14 @@ export class UserController {
 
   @Get(":id")
   getUser(@Param("id") userId: string) {
-      return getManager().findOne(userId);
+      return this.userService.getUser(userId);
   }
   @Post()
-  create(@Body() user: USER) {
-      return this.userService.createUser(user);
+  createUser(@Body() user: USER) {
+      return this.userService.createUser();
   }
   @Put()
-  update(@Body() user: USER) {
+  updateUser(@Body() user: USER) {
       return this.userService.updateUser(user);
   }
   @Delete(':id')

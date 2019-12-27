@@ -3,6 +3,7 @@
     "username": "postgres",
     "password": "example",
     "database": "postgres",
+    "schema": "public",
     "host": "localhost",
     "entities": ["/src/**/**.entity{.ts,.js}"],
     "synchronize": true

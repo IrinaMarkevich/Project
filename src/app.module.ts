@@ -6,6 +6,16 @@ import { Module } from '@nestjs/common';
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user/user.entity';
+// import { MissionController } from './mission/mission.controller';
+// import { MissionService } from './mission/mission.service';
+import { MissionModule } from './mission/mission.module';
+import { Mission } from './mission/mission.entity';
+// import { MotivationController } from './motivation/motivation.controller';
+import { MotivationModule } from './motivation/motivation.module';
+import { Motivation } from './motivation/motivation.entity';
+// import { ResultService } from './result/result.service';
+import { ResultModule } from './result/result.module';
+import { Result } from './result/result.entity';
 
 
 @Module({
@@ -17,10 +27,13 @@ import { User } from './user/user.entity';
       password: "example",
       database: "postgres",
       host: "localhost",
-      entities: [User],
+      entities: [User, Mission, Motivation, Result],
       synchronize: true
     }),
     UserModule,
+    MissionModule,
+    MotivationModule,
+    ResultModule,
   ],
 })
 

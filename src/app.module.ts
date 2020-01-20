@@ -1,4 +1,6 @@
-import { Module } from '@nestjs/common';
+import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
+
+import { AuthenticationMiddleware } from './common/authentication.middleware';
 // import { AppController } from './app.controller';
 // import { AppService } from './app.service';
 // import { UserController } from './user/user.controller';
@@ -37,4 +39,13 @@ import { Result } from './result/result.entity';
   ],
 })
 
-export class AppModule {}
+export class AppModule {
+  public configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(AuthenticationMiddleware)
+      .forRoutes(
+        { path: '/user', method: RequestMethod.POST },
+        { path: '/user', method: RequestMethod.POST },
+      );
+  }
+}

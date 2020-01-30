@@ -19,14 +19,9 @@ export class UserController {
   }
 
   @Post()
-  createUser(@Body() user: User) {
-      return this.userService.createUser(user);
-  }
-
-  @Post()
   @UsePipes(new ValidationPipe())
-  async create(@Body() createUserDto: CreateUserDto) {
-    this.userService.createUser(createUserDto);
+  async createUser(@Body() createUserDto: CreateUserDto) {
+    return this.userService.createUser(createUserDto);
   }
 
   @Delete(':id')

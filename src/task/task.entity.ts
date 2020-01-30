@@ -1,8 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
-import { Task } from "src/task/task.entity";
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Mission {
+export class Task {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -22,8 +21,5 @@ export class Mission {
   time: number;
 
   @Column({ type: "character varying" })
-  user_id: string;
-
-  @OneToMany(type => Task, task => task.mission_id)
-  tasks: Task[];
+  mission_id: string;
 }

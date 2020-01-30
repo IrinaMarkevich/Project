@@ -12,10 +12,10 @@ export class MissionService {
     return await this.missionsRepository.find();
   }
 
-  async getMission(_title: string): Promise<Mission[]> {
+  async getMission(_id: string): Promise<Mission[]> {
    return await this.missionsRepository.find({
-      select: ["title", "type", "amount", "aim", "status", "result"],
-      where: [{ "title": _title }]
+      select: ["id", "title", "status", "result", "evaluation", "time", "user_id"],
+      where: [{ "id": _id }]
     });
   }
 
@@ -23,8 +23,8 @@ export class MissionService {
     return await this.missionsRepository.save(mission);
   }
 
-  async deleteMission(_title){
-    return await this.missionsRepository.delete(_title);
+  async deleteMission(_id){
+    return await this.missionsRepository.delete(_id);
   }
 
 }

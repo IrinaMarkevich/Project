@@ -16,8 +16,8 @@ import { Mission } from './mission/mission.entity';
 import { MotivationModule } from './motivation/motivation.module';
 import { Motivation } from './motivation/motivation.entity';
 // import { ResultService } from './result/result.service';
-import { ResultModule } from './result/result.module';
-import { Result } from './result/result.entity';
+import { TaskModule } from './task/task.module';
+import { Task } from './task/task.entity';
 
 
 @Module({
@@ -29,13 +29,13 @@ import { Result } from './result/result.entity';
       password: "example",
       database: "postgres",
       host: "localhost",
-      entities: [User, Mission, Motivation, Result],
+      entities: [User, Mission, Motivation, Task],
       synchronize: true
     }),
     UserModule,
     MissionModule,
     MotivationModule,
-    ResultModule,
+    TaskModule
   ],
 })
 
@@ -44,8 +44,7 @@ export class AppModule {
     consumer
       .apply(AuthenticationMiddleware)
       .forRoutes(
-        { path: '/user', method: RequestMethod.POST },
-        { path: '/user', method: RequestMethod.POST },
+        { path: '/user', method: RequestMethod.PUT },
       );
   }
 }

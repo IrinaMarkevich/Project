@@ -12,9 +12,9 @@ export class MissionController {
     return this.missionService.getMissions();
   }
 
-  @Get(':title')
+  @Get(':id')
   getMission(@Param() params) {
-      return this.missionService.getMission(params.title);
+      return this.missionService.getMission(params.id);
   }
 
   @Post()
@@ -22,8 +22,8 @@ export class MissionController {
       return this.missionService.createMission(mission);
   }
 
-  @Delete(':title')
+  @Delete(':id')
   deleteMission(@Param() params) {
-      return this.missionService.deleteMission(params.title);
+      return this.missionService.deleteMission(params.id);
   }
 }

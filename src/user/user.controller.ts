@@ -1,8 +1,10 @@
 import { Controller, Post, Body, Get, Put, Delete,Param,UsePipes } from '@nestjs/common';
 import { UserService } from './user.service';
+
 import { User } from './user.entity';
 import { CreateUserDto } from './create-user.dto';
 import { ValidationPipe } from '../common/validation.pipe';
+
 
 @Controller('user')
 export class UserController {
@@ -12,7 +14,6 @@ export class UserController {
   findAll() {
     return this.userService.getUsers();
   }
-
   @Get(':id')
   getUser(@Param() params) {
       return this.userService.getUser(params.id);

@@ -1,3 +1,4 @@
+
 import { Injectable, Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -13,6 +14,7 @@ export class UserService {
 
   async getUser(_id: string): Promise<User[]> {
    return await this.usersRepository.find({
+
       select: ["name", "password", "email", "gender", "age"],
       where: [{ "id": _id }]
     });
@@ -32,4 +34,5 @@ export class UserService {
        where: [{ "id": _id }]
      });
   }
+
 }

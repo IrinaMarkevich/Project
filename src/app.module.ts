@@ -1,3 +1,4 @@
+
 import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 
 import { AuthenticationMiddleware } from './common/authentication.middleware';
@@ -18,7 +19,6 @@ import { Motivation } from './motivation/motivation.entity';
 // import { ResultService } from './result/result.service';
 import { TaskModule } from './task/task.module';
 import { Task } from './task/task.entity';
-
 
 @Module({
   imports: [

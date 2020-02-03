@@ -1,36 +1,38 @@
-import { Injectable } from '@nestjs/common';
-import { Connection } from 'typeorm';
-import { USER } from './user.entity';
+
+import { Injectable, Inject } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './user.entity';
 
 @Injectable()
 export class UserService {
+  constructor(@InjectRepository(User) private usersRepository: Repository<User>) { }
 
-  private readonly entityManager = this.connection.createEntityManager();
-  constructor(
-    /*@InjectRepository(USER) private usersRepository: Repository<USER>*/
-    private readonly connection:Connection,
-    ) { }
+  async getUsers(): Promise<User[]> {
+    return await this.usersRepository.find();
+  }
 
-  async getUser(_id: string): Promise<USER[]> {
-   return await this.entityManager.find(USER, {
+  async getUser(_id: string): Promise<User[]> {
+   return await this.usersRepository.find({
+
       select: ["name", "password", "email", "gender", "age"],
       where: [{ "id": _id }]
     });
   }
-  async createUser(){
-    return await this.entityManager.create(USER, {
-      id: "2",
-      name: "User2",
-      password: "qwerty",
-      email: "...@email",
-      gender: "m",
-      age: 30
-  });
+
+  async createUser(user){
+    return await this.usersRepository.save(user);
   }
-  async updateUser(user) {
-    this.entityManager.save(user)
+
+  async deleteUser(_id){
+    return await this.usersRepository.delete(_id);
   }
-  async deleteUser(id) {
-    this.entityManager.delete(USER, id);
-}
+
+  async getPassword(_id: string): Promise<User[]> {
+    return await this.usersRepository.find({
+       select: [ "password"],
+       where: [{ "id": _id }]
+     });
+  }
+
 }

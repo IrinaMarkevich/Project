@@ -1,26 +1,37 @@
-import { Controller, Post, Body, Get, Put, Delete,Param} from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Delete,Param,UsePipes } from '@nestjs/common';
 import { UserService } from './user.service';
-import {getManager, getRepository} from "typeorm";
-import { USER } from './user.entity';
+
+import { User } from './user.entity';
+import { CreateUserDto } from './create-user.dto';
+import { ValidationPipe } from '../common/validation.pipe';
+
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get(":id")
-  getUser(@Param("id") userId: string) {
-      return this.userService.getUser(userId);
+  @Get()
+  findAll() {
+    return this.userService.getUsers();
   }
+  @Get(':id')
+  getUser(@Param() params) {
+      return this.userService.getUser(params.id);
+  }
+
   @Post()
-  createUser(@Body() user: USER) {
-      return this.userService.createUser();
+  @UsePipes(new ValidationPipe())
+  async createUser(@Body() createUserDto: CreateUserDto) {
+    return this.userService.createUser(createUserDto);
   }
-  @Put()
-  updateUser(@Body() user: USER) {
-      return this.userService.updateUser(user);
-  }
+
   @Delete(':id')
   deleteUser(@Param() params) {
       return this.userService.deleteUser(params.id);
+  }
+
+  @Get(':id')
+  getPassword(@Param() params) {
+      return this.userService.getPassword(params.id);
   }
 }

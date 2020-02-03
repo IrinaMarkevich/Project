@@ -5,6 +5,7 @@
     "database": "postgres",
     "schema": "public",
     "host": "localhost",
-    "entities": ["/src/**/**.entity{.ts,.js}"],
+    "entities": ["/src/**/*.entity{.ts,.js}", "/src/user/user.entity.ts"],
+
     "synchronize": true
-  }
+}

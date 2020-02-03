@@ -1,7 +1,8 @@
-import { Entity, Column, PrimaryColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn, OneToMany } from "typeorm";
+import { Mission } from "src/mission/mission.entity";
 
 @Entity()
-export class USER {
+export class User {
   @PrimaryColumn()
   id: string;
 
@@ -19,4 +20,7 @@ export class USER {
 
   @Column({type: "integer" })
   age: number;
+
+  @OneToMany(type => Mission, mission => mission.user_id)
+    missions: Mission[];
 }

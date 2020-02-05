@@ -14,7 +14,7 @@ export class TaskService {
 
   async getTask(_id: string): Promise<Task[]> {
    return await this.missionsRepository.find({
-      select: ["id", "title", "status", "result", "evaluation", "time", "mission_id"],
+      select: ["id", "title", "status", "result", "time", "mission_id"],
       where: [{ "id": _id }]
     });
   }

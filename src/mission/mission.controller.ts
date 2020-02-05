@@ -1,6 +1,7 @@
 import { Controller, Post, Body, Get, Put, Delete,Param} from '@nestjs/common';
 import { MissionService } from './mission.service';
 import { Mission } from './mission.entity';
+import { CreateMissionDto } from './create-mission.dto';
 
 
 @Controller('mission')
@@ -18,8 +19,8 @@ export class MissionController {
   }
 
   @Post()
-  createMission(@Body() mission: Mission) {
-      return this.missionService.createMission(mission);
+  createMission(@Body() createMissinDto: CreateMissionDto) {
+      return this.missionService.createMission(createMissinDto);
   }
 
   @Delete(':id')

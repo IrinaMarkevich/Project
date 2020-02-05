@@ -21,6 +21,6 @@ export class User {
   @Column({type: "integer" })
   age: number;
 
-  @OneToMany(type => Mission, mission => mission.user_id)
+  @OneToMany(type => Mission, mission => mission.user)
     missions: Mission[];
 }

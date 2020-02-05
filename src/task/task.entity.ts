@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Mission } from "src/mission/mission.entity";
 
 @Entity()
 export class Task {
@@ -15,11 +16,11 @@ export class Task {
   result: number;
 
   @Column({ type: "integer" })
-  evaluation: number;
+  mission_id: number;
 
   @Column({ type: "integer" })
   time: number;
 
-  @Column({ type: "character varying" })
-  mission_id: string;
+  @ManyToOne(type => Mission, mission => mission.tasks)
+  mission: Mission;
 }

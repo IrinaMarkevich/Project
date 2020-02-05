@@ -15,6 +15,7 @@ services:
     restart: always
     ports:
       - 8080:8080
+      - 52391:52391
 
   nest:
     build: .

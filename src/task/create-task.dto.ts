@@ -15,8 +15,5 @@ export class CreateTaskDto {
     @IsInt()  readonly result: number;
 
     @ApiProperty()
-    @IsInt() readonly mission_id: number;
-
-    @ApiProperty()
     @IsInt()    readonly time: number;
 }

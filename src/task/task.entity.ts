@@ -16,9 +16,6 @@ export class Task {
   result: number;
 
   @Column({ type: "integer" })
-  mission_id: number;
-
-  @Column({ type: "integer" })
   time: number;
 
   @ManyToOne(type => Mission, mission => mission.tasks)

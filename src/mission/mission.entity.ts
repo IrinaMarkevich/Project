@@ -17,14 +17,11 @@ export class Mission {
   result: number;
 
   @Column({ type: "integer" })
-  evaluation: number;
-
-  @Column({ type: "integer" })
   time: number;
 
   @ManyToOne(type => User, user => user.missions)
   user: User;
 
-  @OneToMany(type => Task, task => task.mission_id)
+  @OneToMany(type => Task, task => task.mission)
   tasks: Task[];
 }

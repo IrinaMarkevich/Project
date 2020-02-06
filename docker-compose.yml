@@ -3,28 +3,27 @@ version: '3.1'
 services:
 
   db:
-    image: postgres
-    restart: always
-    ports:
-    - "5432:5432"
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: example
-    ports:
-      - 5432:5432
+   image: postgres
+   restart: always
+   ports:
+     - "5432:5432"
+   environment:
+     POSTGRES_USER: postgres
+     POSTGRES_PASSWORD: example
+   ports:
+     - 5432:5432
 
   adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
-      - 52391:52391
+   image: adminer
+   restart: always
+   ports:
+     - 8080:8080
 
   nest:
-    build: .
-    volumes:
-      - .:/nest
-    ports:
-      - 3000:3000
-      - 9229:9229
-    tty: true    
+   build: .
+   volumes:
+     - .:/nest
+   ports:
+     - 3000:3000
+     - 9229:9229
+   tty: true    

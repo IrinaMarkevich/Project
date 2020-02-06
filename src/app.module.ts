@@ -1,22 +1,13 @@
 
 import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
-
 import { AuthenticationMiddleware } from './common/authentication.middleware';
-// import { AppController } from './app.controller';
-// import { AppService } from './app.service';
-// import { UserController } from './user/user.controller';
-// import { UserService } from './user/user.service';
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user/user.entity';
-// import { MissionController } from './mission/mission.controller';
-// import { MissionService } from './mission/mission.service';
 import { MissionModule } from './mission/mission.module';
 import { Mission } from './mission/mission.entity';
-// import { MotivationController } from './motivation/motivation.controller';
 import { MotivationModule } from './motivation/motivation.module';
 import { Motivation } from './motivation/motivation.entity';
-// import { ResultService } from './result/result.service';
 import { TaskModule } from './task/task.module';
 import { Task } from './task/task.entity';
 
@@ -30,7 +21,12 @@ import { Task } from './task/task.entity';
       database: "postgres",
       host: "localhost",
       entities: [User, Mission, Motivation, Task],
-      synchronize: true
+      migrations: [ '/migrations/**/*{.ts,.js}' ],
+      synchronize: false,
+      cli: {
+        migrationsDir: "src/migration"
+      },
+       migrationsRun: true,
     }),
     UserModule,
     MissionModule,

@@ -12,9 +12,12 @@ export class UserService {
     return await this.usersRepository.find();
   }
 
+  async findOne(_id: string): Promise<User> {
+    return await this.usersRepository.findOne({ id: _id});
+  }
+
   async getUser(_id: string): Promise<User[]> {
    return await this.usersRepository.find({
-
       select: ["name", "password", "email", "gender", "age"],
       where: [{ "id": _id }]
     });

@@ -10,6 +10,9 @@ import { MotivationModule } from './motivation/motivation.module';
 import { Motivation } from './motivation/motivation.entity';
 import { TaskModule } from './task/task.module';
 import { Task } from './task/task.entity';
+import { AuthModule } from './auth/auth.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -31,8 +34,11 @@ import { Task } from './task/task.entity';
     UserModule,
     MissionModule,
     MotivationModule,
-    TaskModule
+    TaskModule,
+    AuthModule
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 
 export class AppModule {

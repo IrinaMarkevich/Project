@@ -21,7 +21,7 @@ import { Task } from './task/task.entity';
       database: "postgres",
       host: "localhost",
       entities: [User, Mission, Motivation, Task],
-      migrations: [ __dirname + '/migration/*{.ts,.js}' ],
+      migrations: ['/dist/migration/*.js' ],
       synchronize: false,
       cli: {
         migrationsDir: "src/migration"

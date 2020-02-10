@@ -24,10 +24,11 @@ import { AppService } from './app.service';
       database: "postgres",
       host: "localhost",
       entities: [User, Mission, Motivation, Task],
-      migrations: ['/dist/migration/*.js' ],
+      //migrationsTableName: "migration",
+      migrations: ['./dist/migration/*.js'],
       synchronize: false,
       cli: {
-        migrationsDir: "src/migration"
+        migrationsDir: './src/migration'
       },
        migrationsRun: true,
     }),

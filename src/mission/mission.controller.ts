@@ -1,9 +1,10 @@
-import { Controller, Post, Body, Get, Put, Delete,Param} from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Delete,Param,UsePipes } from '@nestjs/common';
 import { MissionService } from './mission.service';
-import { Mission } from './mission.entity';
 import { CreateMissionDto } from './create-mission.dto';
+import { ValidationPipe } from '../common/validation.pipe';
+import { ApiTags } from '@nestjs/swagger';
 
-
+@ApiTags('mission')
 @Controller('mission')
 export class MissionController {
     constructor(private readonly missionService: MissionService) {}
@@ -19,6 +20,7 @@ export class MissionController {
   }
 
   @Post()
+  @UsePipes(new ValidationPipe())
   createMission(@Body() createMissinDto: CreateMissionDto) {
       return this.missionService.createMission(createMissinDto);
   }

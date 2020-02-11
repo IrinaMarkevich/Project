@@ -14,7 +14,7 @@ export class MissionService {
 
   async getMission(_id: string): Promise<Mission[]> {
    return await this.missionsRepository.find({
-      select: ["id", "title", "status", "result", "time"],
+      select: ["id", "title", "status", "result", "time", "user"],
       where: [{ "id": _id }]
     });
   }

@@ -1,9 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
-import { Mission } from "src/mission/mission.entity";
+import { Entity, Column, PrimaryColumn, ManyToOne } from "typeorm";
+import { Mission } from "../mission/mission.entity";
 
 @Entity()
 export class Task {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id: number;
 
   @Column({ type: "character varying" })

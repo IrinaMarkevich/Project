@@ -1,23 +1,22 @@
-import { IsString, IsInt, IsUUID } from 'class-validator';
+import { IsString, IsInt } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
     @ApiProperty()
-    @IsUUID()
-    @IsString() readonly id: string;
+    @IsString()  id: string;
 
     @ApiProperty()
-    @IsString() readonly name: string;
+    @IsString()  name: string;
 
     @ApiProperty()
-    @IsString() readonly password: string;
+    @IsString()  password: string;
 
     @ApiProperty()
-    @IsString() readonly email: string;
+    @IsString()  email: string;
 
     @ApiProperty()
-    @IsString() readonly gender: string;
+    @IsString()  gender: string;
 
     @ApiProperty()
-    @IsInt()    readonly age: number;
+    @IsInt()     age: number;
 }

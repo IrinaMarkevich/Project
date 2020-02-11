@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryColumn, OneToMany } from "typeorm";
-import { Mission } from "src/mission/mission.entity";
+import { Mission } from "../mission/mission.entity";
 
 @Entity()
 export class User {

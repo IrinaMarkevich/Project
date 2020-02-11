@@ -4,9 +4,12 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { UserModule } from './user/user.module';
 import { MissionModule } from './mission/mission.module';
 import { TaskModule } from './task/task.module';
+import { ValidationPipe } from './common/validation.pipe';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.useGlobalPipes(new ValidationPipe());
 
   const options = new DocumentBuilder()
     .setTitle('Users example')
@@ -39,7 +42,7 @@ async function bootstrap() {
     .addTag('task')
     .build();
 
-   const taskDocument = SwaggerModule.createDocument(app, secondOptions, {
+   const taskDocument = SwaggerModule.createDocument(app, thirdOptions, {
    include: [TaskModule],
   });
   SwaggerModule.setup('api/task', app, taskDocument);

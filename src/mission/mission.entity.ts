@@ -1,10 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne } from "typeorm";
-import { Task } from "src/task/task.entity";
-import { User } from "src/user/user.entity";
+import { Entity, Column, PrimaryColumn, OneToMany, ManyToOne } from "typeorm";
+import { Task } from "../task/task.entity";
+import { User } from "../user/user.entity";
 
 @Entity()
 export class Mission {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id: number;
 
   @Column({ type: "character varying" })

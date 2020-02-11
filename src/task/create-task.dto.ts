@@ -3,20 +3,20 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateTaskDto {
     @ApiProperty()
-    @IsInt()  readonly id: number;
+    @IsInt()   id: number;
 
     @ApiProperty()
-    @IsString() readonly title: string;
+    @IsString()  title: string;
 
     @ApiProperty()
-    @IsString() readonly status: string;
+    @IsString()  status: string;
 
     @ApiProperty()
-    @IsInt()  readonly result: number;
+    @IsInt()    result: number;
 
     @ApiProperty()
-    @IsInt()    readonly time: number;
+    @IsInt()     time: number;
 
     @ApiProperty()
-    @IsInt()    readonly missionId: number;
+    @IsInt()     missionId: number;
 }

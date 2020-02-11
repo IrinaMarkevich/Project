@@ -1,8 +1,8 @@
-import { Controller, Post, Body, Get, Put, Delete,Param,UsePipes } from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Delete, Param, UsePipes } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './create-user.dto';
 import { ValidationPipe } from '../common/validation.pipe';
 import { ApiTags } from '@nestjs/swagger';
+import { User } from './user.entity';
 
 @ApiTags('user')
 @Controller('user')
@@ -20,8 +20,8 @@ export class UserController {
 
   @Post()
   @UsePipes(new ValidationPipe())
-  async createUser(@Body() createUserDto: CreateUserDto) {
-    return this.userService.createUser(createUserDto);
+  async createUser(@Body() user: User) {
+    return this.userService.createUser(user);
   }
 
   @Delete(':id')

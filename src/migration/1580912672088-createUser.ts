@@ -30,7 +30,7 @@ export class createUser1580912672088 implements MigrationInterface {
                 },
                 {
                     name: "age",
-                    type: "int",
+                    type: "integer",
                 },
 
             ]
@@ -54,11 +54,11 @@ export class createUser1580912672088 implements MigrationInterface {
                 },
                 {
                     name: "result",
-                    type: "int",
+                    type: "integer",
                 },
                 {
                     name: "time",
-                    type: "int",
+                    type: "integer",
                 }
             ]
         }), true);
@@ -80,7 +80,7 @@ export class createUser1580912672088 implements MigrationInterface {
             columns: [
                 {
                     name: "id",
-                    type: "int",
+                    type: "integer",
                     isPrimary: true
                 },
                 {
@@ -93,18 +93,18 @@ export class createUser1580912672088 implements MigrationInterface {
                 },
                 {
                     name: "result",
-                    type: "int",
+                    type: "integer",
                 },
                 {
                     name: "time",
-                    type: "int",
+                    type: "integer",
                 }
             ]
         }), true);
 
         await queryRunner.addColumn("task", new TableColumn({
             name: "missionId", 
-            type: "int" 
+            type: "integer" 
         }));
 
         await queryRunner.createForeignKey("task", new TableForeignKey({

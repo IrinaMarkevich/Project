@@ -72,7 +72,7 @@ export class createUser1580912672088 implements MigrationInterface {
             columnNames: ["userId"],
             referencedColumnNames: ["id"],
             referencedTableName: "user",
-            onDelete: "CASCADE"
+            //onDelete: "CASCADE"
         }));  
 
         await queryRunner.createTable(new Table({
@@ -111,7 +111,7 @@ export class createUser1580912672088 implements MigrationInterface {
             columnNames: ["missionId"],
             referencedColumnNames: ["id"],
             referencedTableName: "mission",
-            onDelete: "CASCADE"
+            //onDelete: "CASCADE"
         }));
 
 

@@ -11,4 +11,8 @@ async function createMission(n, count) {
      }
 }
 
+for(let i=0; i<50; i++){
+  createMission(i, 50)
+}
+
 module.exports = createMission;

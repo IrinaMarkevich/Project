@@ -11,4 +11,8 @@ async function createUser(n) {
      }
 }
 
+for(let i=0; i<50; i++){
+  createUser(i)
+}
+
 module.exports = createUser;

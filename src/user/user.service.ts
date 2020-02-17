@@ -9,7 +9,11 @@ export class UserService {
   constructor(@InjectRepository(User) private usersRepository: Repository<User>) { }
 
   async findAll(): Promise<User[]> {
-    return await this.usersRepository.find( );
+    return await this.usersRepository.find( { relations: ["missions", "missions.tasks"] });
+  }
+
+  async findAllTasks(_id: string): Promise<User[]> {
+    return await this.usersRepository.query("CALL public.count_tasks(?id)", [_id]);
   }
 
   async findOne(_id: string): Promise<User> {

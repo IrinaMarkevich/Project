@@ -11,4 +11,8 @@ async function createTask(n, count) {
      }
 }
 
+for(let i=0; i<50; i++){
+  createTask(i, 50)
+}
+
 module.exports = createTask;

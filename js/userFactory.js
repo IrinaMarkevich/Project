@@ -15,6 +15,7 @@ function userFactory (n) {
     gender: pick(gender),
     age: pick(age)
   }
+  
   return user
 }
 module.exports = userFactory

@@ -14,15 +14,15 @@ export class UserController {
     return this.userService.findAll();
   }
   
-  @Get(':id')
-  getUser(@Param() params) {
-      return this.userService.findAllTasks(params.id);
-  }
-
   // @Get(':id')
   // getUser(@Param() params) {
-  //     return this.userService.getUser(params.id);
+  //     return this.userService.findAllTasks(params.id);
   // }
+
+  @Get(':id')
+  getUser(@Param() params) {
+      return this.userService.getUser(params.id);
+  }
 
   @Post()
   @UsePipes(new ValidationPipe())

@@ -1,21 +1,12 @@
 const pick = require('./pick')
 
-
-function getRandomPositiveInt(max) {
-
-    return Math.floor(Math.random() * Math.floor(max))
-}
-
-function missionFactory (n, count) {
+function missionFactory (n, user_id) {
   const id = n; 
   const title = 'Project' + n;
   const status = 'Status' + n;
   const result = [0, 1]
   const time = 0
-  
-  const rand = getRandomPositiveInt(count)
-
-  const userId = 'id' + rand;
+  const userId = user_id;
   const mission = {
     id: id,
     title: title,

@@ -1,4 +1,3 @@
-
 import { Injectable, Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -12,9 +11,10 @@ export class UserService {
     return await this.usersRepository.find( { relations: ["missions", "missions.tasks"] });
   }
 
-  async findAllTasks(_id: string): Promise<User[]> {
-    return await this.usersRepository.query("CALL public.count_tasks(?id)", [_id]);
-  }
+  // async findAllTasks(_id: string): Promise<User[]> {
+  //   console.log(_id)
+  //   return await this.usersRepository.query("CALL public.count_tasks('" +_id+"')");
+  // }
 
   async findOne(_id: string): Promise<User> {
     return await this.usersRepository.findOne({ id: _id});
@@ -22,7 +22,7 @@ export class UserService {
 
   async getUser(_id: string): Promise<User[]> {
    return await this.usersRepository.find({
-      select: ["name", "password", "email", "gender", "age"],
+      relations: ["missions", "missions.tasks"],
       where: [{ "id": _id }]
     });
   }

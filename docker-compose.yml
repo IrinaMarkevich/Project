@@ -27,3 +27,16 @@ services:
      - 3000:3000
      - 9229:9229
    tty: true    
+
+  database:
+    image: 'mongo'
+    restart: always
+    environment:
+      - MONGO_INITDB_DATABASE=mongo_db
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./mongo-volume:/data/db
+    ports:
+      - 27017-27019:27017-27019

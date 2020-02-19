@@ -7,8 +7,6 @@ async function findAllUsers() {
     axios.get("http://localhost:3000/user")
       .then(response => {
        Data = response.data;
-        //console.log("response", response.data)
-        //console.log(Users)
       
         for(let user of Data) {
           let countMission = user.missions.length;
@@ -33,15 +31,22 @@ async function findAllUsers() {
             countFinishedTask: countFinishedTask
           })
          }
-        //console.log(listUsers)
-
-        const ratingByMissions = listUsers.sort((prev, next) => next.countMission - prev.countMission);
-        const ratingByTasks = listUsers.sort((prev, next) => next.countTask - prev.countTask);
-        const ratingByFinishedTasks = listUsers.sort((prev, next) => next.countFinishedTask - prev.countFinishedTask);
-        console.log(ratingByFinishedTasks)
+        //console.log(listUsers);
+        //return listUsers;
+        // const ratingByMissions = listUsers.sort((prev, next) => next.countMission - prev.countMission);
+        // const ratingByTasks = listUsers.sort((prev, next) => next.countTask - prev.countTask);
+        // const ratingByFinishedTasks = listUsers.sort((prev, next) => next.countFinishedTask - prev.countFinishedTask);
+        // console.log(ratingByFinishedTasks)
+        return listUsers;
       })
-   
+      .then(listUsers => {
+        console.log(listUsers);
+      })
       .catch(error => console.log(error))
 }
 
-findAllUsers();
+findAllUsers()
+// console.log(findAllUsers());
+// console.log(listUsers);
+
+module.exports = findAllUsers;

@@ -11,11 +11,6 @@ export class UserService {
     return await this.usersRepository.find( { relations: ["missions", "missions.tasks"] });
   }
 
-  // async findAllTasks(_id: string): Promise<User[]> {
-  //   console.log(_id)
-  //   return await this.usersRepository.query("CALL public.count_tasks('" +_id+"')");
-  // }
-
   async findOne(_id: string): Promise<User> {
     return await this.usersRepository.findOne({ id: _id});
   }

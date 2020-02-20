@@ -1,22 +1,22 @@
-// import { Test, TestingModule } from '@nestjs/testing';
-// import { UserController } from './user.controller';
-// import { UserService } from './user.service';
+// const axios = require('axios');
+// const chai = require('chai');
+// const assert = chai.assert;  
 
-// describe('AppController', () => {
-//   let userController: UserController;
+// axios.get("http://localhost:3000/user")
+//   .then(response => {
+//     it('', () => {
+//       for(let obj of response.data) {
+//         assert.property(obj, 'id', 'property "id" not exists ');
+//         assert.property(obj, 'name', 'property "name" not exists ');
+//         assert.property(obj, 'password', 'property "password" not exists ');
+//         assert.property(obj, 'email', 'property "email" not exists ');
+//         assert.property(obj, 'gender', 'property "gender" not exists ');
+//         assert.property(obj, 'age', 'property "age" not exists ');
+//       }
 
-//   beforeEach(async () => {
-//     const user: TestingModule = await Test.createTestingModule({
-//       controllers: [UserController],
-//       providers: [UserService],
-//     }).compile();
-
-//     userController = user.get<UserController>(UserController);
+//     })
+//   })
+//   .catch(error => console.log(error))
+//   .then(function () {
+//     // always executed
 //   });
-
-//   describe('root', () => {
-//     it('should return "Hello World!"', () => {
-//       expect(userController.findAll()).toBe('Hello World!');
-//     });
-//   });
-// });

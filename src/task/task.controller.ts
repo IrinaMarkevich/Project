@@ -15,18 +15,18 @@ export class TaskController {
   }
 
   @Get(':id')
-  getMission(@Param() params) {
+  getTask(@Param() params) {
       return this.taskService.getTask(params.id);
   }
 
   @Post()
   @UsePipes(new ValidationPipe())
-  createMission(@Body() task: Task) {
+  createTask(@Body() task: Task) {
       return this.taskService.createTask(task);
   }
 
   @Delete(':id')
-  deleteMission(@Param() params) {
+  deleteTask(@Param() params) {
       return this.taskService.deleteTask(params.id);
   }
 }

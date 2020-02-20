@@ -13,11 +13,6 @@ export class UserController {
   findAll() {
     return this.userService.findAll();
   }
-  
-  // @Get(':id')
-  // getUser(@Param() params) {
-  //     return this.userService.findAllTasks(params.id);
-  // }
 
   @Get(':id')
   getUser(@Param() params) {

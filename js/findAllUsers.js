@@ -1,52 +1,110 @@
 const axios = require('axios');
-
-let Data = [];
-let listUsers = [];
+const ratingUsersByTasks = require('./ratingUsersByTasks');
+const ratingUsersByTasksLastMissions = require('./ratingUsersByTasksLastMissions');
+const MongoClient = require('mongodb').MongoClient;
+const url = "mongodb://admin:admin@127.0.0.1:27017/mongo_db";
 
 async function findAllUsers() {
-    axios.get("http://localhost:3000/user")
-      .then(response => {
-       Data = response.data;
-      
-        for(let user of Data) {
-          let countMission = user.missions.length;
-          let countTask = 0;
-          let countFinishedTask = 0;
-      
-          for( let mission of user.missions) {
-            countTask = countTask + mission.tasks.length;
+  axios.get("http://localhost:3000/user")
+    .then(response => {
+     Data = response.data;
+     
+     return Data;
+    })
+    .then(Data => {
+      let obj = [];
+      let listUsers = []
 
-            for(let task of mission.tasks) {
+      for(let user of Data) {
+       let missions = [];
+       let lastMissions = []; 
+       let countTask = 0;
+       let countTaskLastMissions = 0; 
+       let countFinishedTask = 0; 
+       let index = 0;
 
-              if(task.result == 1)
-                countFinishedTask += 1;
+        for( let mission of user.missions) {
+          missions.push(mission.title);
+          countTask = countTask + mission.tasks.length;
 
-            }
+          for(let task of mission.tasks) {
+
+            if(task.result == 1)
+              countFinishedTask += 1;
 
           }
-          listUsers.push({
-            id: user.id,
-            countMission: countMission,
-            countTask: countTask,
-            countFinishedTask: countFinishedTask
-          })
-         }
-        //console.log(listUsers);
-        //return listUsers;
-        // const ratingByMissions = listUsers.sort((prev, next) => next.countMission - prev.countMission);
-        // const ratingByTasks = listUsers.sort((prev, next) => next.countTask - prev.countTask);
-        // const ratingByFinishedTasks = listUsers.sort((prev, next) => next.countFinishedTask - prev.countFinishedTask);
-        // console.log(ratingByFinishedTasks)
-        return listUsers;
-      })
-      .then(listUsers => {
-        console.log(listUsers);
-      })
-      .catch(error => console.log(error))
+        }
+
+        if(missions.length >= 3 ) {
+          lastMissions = missions.slice(-3);
+        } else lastMissions = missions;
+
+        for(lastMission of lastMissions) {
+          for(mission of user.missions) {
+            if(lastMission == mission.title){
+              countTaskLastMissions = countTaskLastMissions + mission.tasks.length;
+            }
+          }
+        }
+
+        if (countTask > 0) 
+          index = countFinishedTask / countTask;
+        
+
+
+        obj.push({
+          id: user.id,
+          missions: missions,
+          lastMissions: lastMissions,
+          countTask: countTask,
+          countTaskLastMissions: countTaskLastMissions,
+          countFinishedTask: countFinishedTask,
+          index: index
+        })
+
+        listUsers.push({
+          id: user.id,
+          countTask: countTask,
+          countTaskLastMissions: countTaskLastMissions
+        })
+
+      }
+      const sortByTasks = listUsers.sort((prev, next) => next.countTask - prev.countTask);
+      const sortByTasksLastMissions = listUsers.sort((prev, next) => next.countTaskLastMissions - prev.countTaskLastMissions);
+      const ratingByTasks = ratingUsersByTasks(sortByTasks);
+      const ratingByTasksLastMissions = ratingUsersByTasksLastMissions(sortByTasksLastMissions);
+
+      for(user of ratingByTasks) {
+        for(client of obj){
+          if(user.id == client.id) {
+            client.rating = user.rating;
+          }
+        }
+      }
+      for(user of ratingByTasksLastMissions) {
+        for(client of obj){
+          if(user.id == client.id) {
+            client.ratingByLastMissions = user.rating;
+          }
+        }
+      }
+
+      return obj; 
+    })
+    .then(obj => {
+      
+      MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        const dbo = db.db("mongo_db");
+        dbo.collection("customers").insertMany(obj, function(err, res) {
+          if (err) throw err;
+          console.log("Number of documents inserted: " + res.insertedCount);
+          db.close();
+        });
+      });
+      
+    })
+    .catch(error => console.log(error))
 }
-
-findAllUsers()
-// console.log(findAllUsers());
-// console.log(listUsers);
-
+findAllUsers();
 module.exports = findAllUsers;

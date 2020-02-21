@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { MotivationService } from './motivation.service';
-import { MotivationController } from './motivation.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Motivation } from './motivation.entity';
+import { Module } from '@nestjs/common'
+import { MotivationService } from './motivation.service'
+import { MotivationController } from './motivation.controller'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { Motivation } from './motivation.entity'
 
 @Module({
   imports: [TypeOrmModule.forFeature([Motivation])],

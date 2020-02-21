@@ -1,10 +1,10 @@
-function ratingUsersByTasksLastMissions(users) {
-    max = users[0].countTaskLastMissions;
-    for(user of users) {
-        rating = Math.trunc(user.countTaskLastMissions * 100 / max);
-        user.rating = rating
-    }
-return users;
+function ratingUsersByTasksLastMissions (users) {
+  const max = users[0].countTaskLastMissions
+  for (const user of users) {
+    const rating = Math.trunc(user.countTaskLastMissions * 100 / max)
+    user.rating = rating
+  }
+  return users
 }
 
-module.exports = ratingUsersByTasksLastMissions;
+module.exports = ratingUsersByTasksLastMissions

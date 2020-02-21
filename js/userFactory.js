@@ -1,8 +1,8 @@
 const pick = require('./pick')
 
 function userFactory (n) {
-  const id = 'id' + n; 
-  const name = 'User' + n;
+  const id = 'id' + n
+  const name = 'User' + n
   const password = ['qwerty', '12345']
   const age = [20, 21, 22, 23, 24, 25]
   const gender = ['m', 'f']
@@ -15,7 +15,7 @@ function userFactory (n) {
     gender: pick(gender),
     age: pick(age)
   }
-  
+
   return user
 }
 module.exports = userFactory

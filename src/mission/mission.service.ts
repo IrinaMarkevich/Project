@@ -1,30 +1,29 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Mission } from './mission.entity';
+import { Injectable, Inject } from '@nestjs/common'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Repository } from 'typeorm'
+import { Mission } from './mission.entity'
 
 @Injectable()
 export class MissionService {
-    constructor(@InjectRepository(Mission) 
+  constructor (@InjectRepository(Mission)
     private missionsRepository: Repository<Mission>) { }
 
-  async getMissions(): Promise<Mission[]> {
-    return await this.missionsRepository.find();
+  async getMissions (): Promise<Mission[]> {
+    return await this.missionsRepository.find()
   }
 
-  async getMission(_id: string): Promise<Mission[]> {
-   return await this.missionsRepository.find({
-      select: ["id", "title", "status", "result", "time", "user"],
-      where: [{ "id": _id }]
-    });
+  async getMission (_id: string): Promise<Mission[]> {
+    return await this.missionsRepository.find({
+      select: ['id', 'title', 'status', 'result', 'time', 'user'],
+      where: [{ id: _id }]
+    })
   }
 
-  async createMission(mission){
-    return await this.missionsRepository.save(mission);
+  async createMission (mission) {
+    return await this.missionsRepository.save(mission)
   }
 
-  async deleteMission(_id){
-    return await this.missionsRepository.delete(_id);
+  async deleteMission (_id) {
+    return await this.missionsRepository.delete(_id)
   }
-
 }

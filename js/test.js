@@ -1,13 +1,13 @@
-const chai = require('chai');  
-// var chaiAsPromised = require("chai-as-promised");  
+const chai = require('chai')
+// var chaiAsPromised = require("chai-as-promised");
 const userFactory = require('./userFactory')
 const missionFactory = require('./missionFactory')
 const taskFactory = require('./taskFactory')
 // const createUser = require('./createUser');
 // const createMission = require('./createMission');
 // const createTask = require('./createTasks');
-// chai.use(chaiAsPromised);                                                       
-const assert = chai.assert;
+// chai.use(chaiAsPromised);
+const assert = chai.assert
 // chai.should();
 
 it('Function userFactory returns a Object {"id", "name", "password", "email", "gender", "age"}', () => {

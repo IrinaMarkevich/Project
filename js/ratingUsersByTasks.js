@@ -1,10 +1,10 @@
-function ratingUsersByTasks(users) {
-    max = users[0].countTask;
-    for(user of users) {
-        rating = user.countTask * 100 / max;
-        user.rating = rating
-    }
-return users;
+function ratingUsersByTasks (users) {
+  const max = users[0].countTask
+  for (const user of users) {
+    const rating = user.countTask * 100 / max
+    user.rating = rating
+  }
+  return users
 }
 
-module.exports = ratingUsersByTasks;
+module.exports = ratingUsersByTasks

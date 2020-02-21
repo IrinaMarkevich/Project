@@ -1,12 +1,12 @@
 const pick = require('./pick')
 
 function missionFactory (n, user_id) {
-  const id = n; 
-  const title = 'Project' + n;
-  const status = 'Status' + n;
+  const id = n
+  const title = 'Project' + n
+  const status = 'Status' + n
   const result = [0, 1]
   const time = 0
-  const userId = user_id;
+  const userId = user_id
   const mission = {
     id: id,
     title: title,

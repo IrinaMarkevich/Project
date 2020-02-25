@@ -19,14 +19,45 @@ services:
    ports:
      - 8080:8080
 
-  nest:
+  nest1:
    build: .
+   image: nest1
+   container_name: nest1
    volumes:
      - .:/nest
    ports:
-     - 3000:3000
-     - 9229:9229
+     - 81:3000
    tty: true    
+
+  nest2:
+   build: .
+   image: nest2
+   container_name: nest2
+   volumes:
+     - .:/nest
+   ports:
+     - 82:3000
+   tty: true  
+
+  nest3:
+   build: .
+   image: nest3
+   container_name: nest3
+   volumes:
+     - .:/nest
+   ports:
+     - 83:3000
+   tty: true 
+
+  nest4:
+   build: .
+   image: nest4
+   container_name: nest4
+   volumes:
+     - .:/nest 
+   ports:
+     - 84:3000
+   tty: true 
 
   database:
     image: 'mongo'
@@ -35,8 +66,21 @@ services:
       - MONGO_INITDB_DATABASE=mongo_db
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin
-    volumes:
-      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-      - ./mongo-volume:/data/db
     ports:
       - 27017-27019:27017-27019
+
+  nginx: 
+   image: nginx:latest
+   container_name: production_nginx
+   volumes:
+     - .:/etc/nginx
+   ports:
+     - 80:80
+     - 443:443
+   links:
+        - nest1
+        - nest2
+        - nest3
+        - nest4
+
+  

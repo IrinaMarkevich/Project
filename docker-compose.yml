@@ -5,8 +5,6 @@ services:
   db:
    image: postgres
    restart: always
-   ports:
-     - "5432:5432"
    environment:
      POSTGRES_USER: postgres
      POSTGRES_PASSWORD: example
@@ -19,45 +17,29 @@ services:
    ports:
      - 8080:8080
 
+  nginx: 
+   build: ./nginx
+   ports:
+     - 80:80
+   links:
+      - nest2:nest2
+      - nest1:nest1
+
   nest1:
+   restart: always
    build: .
-   image: nest1
-   container_name: nest1
    volumes:
      - .:/nest
    ports:
-     - 81:3000
-   tty: true    
+     - "80"
 
   nest2:
+   restart: always
    build: .
-   image: nest2
-   container_name: nest2
    volumes:
      - .:/nest
    ports:
-     - 82:3000
-   tty: true  
-
-  nest3:
-   build: .
-   image: nest3
-   container_name: nest3
-   volumes:
-     - .:/nest
-   ports:
-     - 83:3000
-   tty: true 
-
-  nest4:
-   build: .
-   image: nest4
-   container_name: nest4
-   volumes:
-     - .:/nest 
-   ports:
-     - 84:3000
-   tty: true 
+     - "80"
 
   database:
     image: 'mongo'
@@ -66,21 +48,14 @@ services:
       - MONGO_INITDB_DATABASE=mongo_db
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./mongo-volume:/data/db
     ports:
       - 27017-27019:27017-27019
 
-  nginx: 
-   image: nginx:latest
-   container_name: production_nginx
-   volumes:
-     - .:/etc/nginx
-   ports:
-     - 80:80
-     - 443:443
-   links:
-        - nest1
-        - nest2
-        - nest3
-        - nest4
+
+
+
 
   

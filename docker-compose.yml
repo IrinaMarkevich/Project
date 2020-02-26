@@ -5,8 +5,6 @@ services:
   db:
    image: postgres
    restart: always
-   ports:
-     - "5432:5432"
    environment:
      POSTGRES_USER: postgres
      POSTGRES_PASSWORD: example
@@ -19,14 +17,32 @@ services:
    ports:
      - 8080:8080
 
-  nest:
-   build: .
-   volumes:
-     - .:/nest
+  nginx: 
+   build: ./nginx
+   links:
+     - nest2:nest2
+     - nest1:nest1
    ports:
-     - 3000:3000
-     - 9229:9229
-   tty: true    
+     - 443:443
+
+
+  nest1:
+   image: nest
+   restart: always
+   build: .
+   links:
+     - db:db
+   ports:
+     - "443"
+
+  nest2:
+   image: nest
+   restart: always
+   build: .
+   links:
+     - db:db
+   ports:
+     - "443"
 
   database:
     image: 'mongo'
@@ -39,4 +55,10 @@ services:
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
       - ./mongo-volume:/data/db
     ports:
-      - 27017-27019:27017-27019
+      - 27017:27017
+
+
+
+
+
+  

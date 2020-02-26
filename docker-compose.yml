@@ -19,27 +19,30 @@ services:
 
   nginx: 
    build: ./nginx
-   ports:
-     - 80:80
    links:
-      - nest2:nest2
-      - nest1:nest1
+     - nest2:nest2
+     - nest1:nest1
+   ports:
+     - 443:443
+
 
   nest1:
+   image: nest
    restart: always
    build: .
-   volumes:
-     - .:/nest
+   links:
+     - db:db
    ports:
-     - "80"
+     - "443"
 
   nest2:
+   image: nest
    restart: always
    build: .
-   volumes:
-     - .:/nest
+   links:
+     - db:db
    ports:
-     - "80"
+     - "443"
 
   database:
     image: 'mongo'
@@ -52,7 +55,7 @@ services:
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
       - ./mongo-volume:/data/db
     ports:
-      - 27017-27019:27017-27019
+      - 27017:27017
 
 
 

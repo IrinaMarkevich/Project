@@ -7,7 +7,7 @@ async function createTask (n) {
     const miision_id = getRandomInt(49)
     const task = taskFactory(i, miision_id)
     try {
-      const response = await axios.post('http://localhost:3000/task', task)
+      const response = await axios.post('http://localhost:5000/task', task)
       console.log(response)
     } catch (error) {
       console.error(error)

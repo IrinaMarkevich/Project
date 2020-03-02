@@ -8,7 +8,7 @@ async function createMission (n) {
     const user_id = 'id' + count
     const mission = missionFactory(i, user_id)
     try {
-      const response = await axios.post('http://localhost:3000/mission', mission)
+      const response = await axios.post('http://localhost:5000/mission', mission)
       console.log(response)
     } catch (error) {
       console.error(error)

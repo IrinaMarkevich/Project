@@ -22,7 +22,7 @@ import { AppService } from './app.service';
       username: "postgres",
       password: "example",
       database: "postgres",
-      host: "localhost",
+      host: "db",
       entities: [User, Mission, Motivation, Task],
       //migrationsTableName: "migration",
       migrations: ['./dist/migration/*.js'],

@@ -33,7 +33,7 @@ services:
    links:
      - db:db
    ports:
-     - "443"
+     - 5000
 
   nest2:
    image: nest
@@ -42,7 +42,7 @@ services:
    links:
      - db:db
    ports:
-     - "443"
+     - 5000
 
   database:
     image: 'mongo'

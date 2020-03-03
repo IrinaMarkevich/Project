@@ -5,7 +5,7 @@ const MongoClient = require('mongodb').MongoClient
 const url = 'mongodb://admin:admin@127.0.0.1:27017/mongo_db'
 
 async function findAllUsers () {
-  axios.get('http://localhost:3000/user')
+  axios.get('http://localhost:5000/user')
     .then(response => {
       const Data = response.data
 

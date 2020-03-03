@@ -4,4 +4,4 @@ COPY package.json /nest
 COPY . /nest
 RUN npm install
 CMD npm run start
-EXPOSE 3000 443
+EXPOSE 5000 443

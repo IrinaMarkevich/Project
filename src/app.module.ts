@@ -1,6 +1,6 @@
 
 import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
-import { AuthenticationMiddleware } from './common/authentication.middleware';
+// import { AuthenticationMiddleware } from './common/authentication.middleware';
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user/user.entity';
@@ -10,15 +10,19 @@ import { MotivationModule } from './motivation/motivation.module';
 import { Motivation } from './motivation/motivation.entity';
 import { TaskModule } from './task/task.module';
 import { Task } from './task/task.entity';
-import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+// import { UserController } from './user/user.controller';
+// import { UserService } from './user/user.service';
+// import { AuthService } from './auth/auth.service';
+import { AuthController } from './auth/auth.controller';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: "postgres",
-      port: 5432,
+      // port: 5432,
       username: "postgres",
       password: "example",
       database: "postgres",
@@ -39,15 +43,15 @@ import { AppService } from './app.service';
     AuthModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 
 export class AppModule {
-  public configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(AuthenticationMiddleware)
-      .forRoutes(
-        { path: '/user', method: RequestMethod.PUT },
-      );
-  }
+  // public configure(consumer: MiddlewareConsumer) {
+  //   consumer
+  //     .apply(AuthenticationMiddleware)
+  //     .forRoutes(
+  //       { path: '/user', method: RequestMethod.PUT },
+  //     );
+  // }
 }

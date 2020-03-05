@@ -1,27 +1,38 @@
-import { Injectable } from '@nestjs/common'
-import { UserService } from '../user/user.service'
-import { JwtService } from '@nestjs/jwt'
+import { Injectable } from '@nestjs/common';
+import { JwtService } from  '@nestjs/jwt';
+import { UserService } from  '../user/user.service';
+import { User } from  '../user/user.entity';
 
 @Injectable()
 export class AuthService {
-  constructor (
-      private readonly usersService: UserService,
-      private readonly jwtService: JwtService
-  ) {}
+    constructor(
+        private readonly userService: UserService,
+        private readonly jwtService: JwtService
+    ) { }
 
-  async validateUser (_id: string, pass: string): Promise<any> {
-    const user = await this.usersService.findOne(_id)
-    if (user && user.password === pass) {
-      const { password, ...result } = user
-      return result
+    private async validate(userData: User): Promise<User> {
+        return await this.userService.findById(userData.id);
     }
-    return null
-  }
 
-  async login (user: any) {
-    const payload = { name: user.name, id: user.id }
-    return {
-      access_token: this.jwtService.sign(payload)
+    public async login(user: User): Promise< any | { status: number }>{
+        return this.validate(user).then((userData)=>{
+          if(!userData){
+            return { status: 404 };
+          }
+          let payload = `${userData.name}${userData.id}`;
+          const accessToken = this.jwtService.sign(payload);
+
+          return {
+             expires_in: 3600,
+             access_token: accessToken,
+             user_id: payload,
+             status: 200
+          };
+
+        });
     }
-  }
+
+    public async register(user: User): Promise<any>{
+        return this.userService.createUser(user)
+    } 
 }

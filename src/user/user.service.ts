@@ -15,6 +15,22 @@ export class UserService {
     return await this.usersRepository.findOne({ id: _id })
   }
 
+  async findByEmail(email: string): Promise<User> {
+    return await this.usersRepository.findOne({
+        where: {
+            email: email,
+        }
+    });
+}
+
+async findById(id: string): Promise<User> {
+    return await this.usersRepository.findOne({
+        where: {
+            id: id,
+        }
+    });
+}
+
   async getUser (_id: string): Promise<User[]> {
     return await this.usersRepository.find({
       relations: ['missions', 'missions.tasks'],

@@ -19,7 +19,7 @@ export class AuthService {
           if(!userData){
             return { status: 404 };
           }
-          let payload = `${userData.name}${userData.id}`;
+          let payload = `${userData.id}`;
           const accessToken = this.jwtService.sign(payload);
 
           return {

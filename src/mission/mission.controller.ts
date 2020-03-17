@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-constructor */
+/* eslint-disable no-unused-vars */
 import { Controller, Post, Body, Get, Put, Delete, Param, UsePipes } from '@nestjs/common'
 import { MissionService } from './mission.service'
 import { CreateMissionDto } from './create-mission.dto'
@@ -15,9 +17,9 @@ export class MissionController {
     return this.missionService.getMissions()
   }
 
-  @Get(':id')
+  @Get(':userId')
   getMission (@Param() params) {
-    return this.missionService.getMission(params.id)
+    return this.missionService.getMission(params.userId)
   }
 
   @Post()

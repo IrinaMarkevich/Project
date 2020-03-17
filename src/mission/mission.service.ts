@@ -1,4 +1,6 @@
-import { Injectable, Inject } from '@nestjs/common'
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-constructor */
+import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { Mission } from './mission.entity'
@@ -12,10 +14,10 @@ export class MissionService {
     return await this.missionsRepository.find()
   }
 
-  async getMission (_id: string): Promise<Mission[]> {
+  async getMission (_userId: string): Promise<Mission[]> {
     return await this.missionsRepository.find({
       relations: ['tasks'],
-      where: [{ id: _id }]
+      where: [{ userId: _userId }]
     })
   }
 

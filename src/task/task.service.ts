@@ -12,10 +12,10 @@ export class TaskService {
     return await this.missionsRepository.find()
   }
 
-  async getTask (_id: string): Promise<Task[]> {
+  async getTask (_id_mission: number): Promise<Task[]> {
     return await this.missionsRepository.find({
       select: ['id', 'title', 'status', 'result', 'time', 'missionId'],
-      where: [{ id: _id }]
+      where: [{ missionId: _id_mission }]
     })
   }
 

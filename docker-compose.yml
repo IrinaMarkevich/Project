@@ -20,11 +20,10 @@ services:
   nginx: 
    build: ./nginx
    links:
-     - nest2:nest2
-     - nest1:nest1
+     - nest2
+     - nest1
    ports:
-     - 80:80
-
+     - 5000:5000
 
   nest1:
    image: nest
@@ -33,7 +32,7 @@ services:
    links:
      - db:db
    ports:
-     - 5000
+     - "5000"
 
   nest2:
    image: nest
@@ -42,7 +41,7 @@ services:
    links:
      - db:db
    ports:
-     - 5000
+     - "5000"
 
   database:
     image: 'mongo'

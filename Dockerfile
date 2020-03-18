@@ -1,7 +1,7 @@
 FROM node:10
 WORKDIR /nest
 COPY package.json /nest
-COPY . /nest
 RUN npm install
+COPY . /nest
 CMD npm run start
-EXPOSE 5000 443
+EXPOSE 5000 443 80
